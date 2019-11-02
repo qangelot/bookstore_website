@@ -1,7 +1,15 @@
 <?php $title = $book['title']; ?>
 <?php ob_start(); ?>
 <?php $author = $book['author'] !== 'Unknown' ? $book['author'] : 'Inconnu'; ?>
+
 <div class="container">
+  <?php if (isset($searchResult)) { ?>
+    <div class="row">
+      <div class="col-md-12">
+        <a href="<?php echo $searchResult; ?>">< Retour aux résultats</a>
+      </div>
+    </div>
+  <?php } ?>
   <div class="row">
     <div class="col-md-4 mt-3">
       <img

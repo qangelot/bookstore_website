@@ -1,5 +1,8 @@
 <?php
-$action = isset($_GET['action']) ? (string) $_GET['action'] : 'books';
+if (!isset($_GET['action'])) {
+  header('Location: ?action=books');
+}
+$action = (string) $_GET['action'];
 
 switch ($action) {
   case 'books':

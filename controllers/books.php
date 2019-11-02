@@ -30,6 +30,12 @@ function showBook (string $id): void
       'name' => $book['title'],
       'link' => '?action=books&id=' . $id
     );
+    if (isset($_SERVER['HTTP_REFERER'])) {
+      parse_str(parse_url($_SERVER['HTTP_REFERER'], PHP_URL_QUERY), $queries);
+      if ($queries['action'] === 'books' && !isset($queries['id'])) {
+        $searchResult = $_SERVER['HTTP_REFERER'];
+      }
+    }
     require ('views/book.php');
   } catch (Exception $e) {
     require('views/404.php');
