@@ -5,14 +5,32 @@ $limit = 20;
 
 /**
  * @param int $page
+ * @param string $sort (optional)
  * @return array[]
  */
-function getBooks(int $page = 1): array
+function getBooks(int $page = 1, ?string $sort): array
 {
   global $books;
   global $limit;
+  $data = $books;
+  if ($sort) {
+    usort($data, function ($a, $b) {
+      global $sort;
+      return $a[$sort] > $b[$sort];
+    });
+  }
   $offset = ($page - 1) * $limit;
-  return array_slice($books, $offset, $limit);
+  return array_slice($data, $offset, $limit);
+}
+
+/**
+ * @return int
+ */
+function countBooks (): int
+{
+  global $books;
+
+  return count($books);
 }
 
 /**
@@ -24,19 +42,18 @@ function getBook(string $id): array
 {
   global $books;
 
-  if (!isset($books[$id])) {
+  $book = null;
+
+  foreach ($books as $value) {
+    if ($value['id'] === $id) {
+      $book = $value;
+      break;
+    }
+  }
+
+  if (!$book) {
     throw new Exception("Invalid id:" . $id);
   }
 
-  return $books[$id];
-}
-
-/**
- * @return int
- */
-function countBooks (): int
-{
-  global $books;
-
-  return count($books);
+  return $book;
 }

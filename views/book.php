@@ -34,7 +34,7 @@
             <th><?php echo $book['year']; ?></th>
           </tr>
           <tr>
-            <td>Origine</td>
+            <td>Pays</td>
             <th><?php echo $book['country']; ?></th>
           </tr>
           <tr>

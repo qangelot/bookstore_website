@@ -7,13 +7,23 @@ $breadcrumb = array(array(
   'link' => '?action=books'
 ));
 
-function listBooks(int $page = 1): void
+/**
+ * @param int $page
+ * @param string (optional) $sort
+ */
+function listBooks(int $page = 1, ?string $sort): void
 {
   global $breadcrumb;
   global $limit;
+  $sortValues = array(
+    array('value' => 'title', 'name' => "Titre"),
+    array('value' => 'author', 'name' => "Auteur"),
+    array('value' => 'year', 'name' => "Date de parution"),
+    array('value' => 'language', 'name' => "Langue"),
+  );
   $breadcrumb[0]['active'] = true;
   $pages = (int) ceil(countBooks() / $limit);
-  $books = getBooks($page);
+  $books = getBooks($page, $sort);
   require ('views/books.php');
 }
 

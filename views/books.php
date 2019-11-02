@@ -30,12 +30,28 @@
     }
   }
 </style>
-<?php $url = '?action=books'; ?>
+<?php include('utils/uri.php'); ?>
 <div class="container">
-  <h1>Liste des livres</h1>
   <div class="row">
-    <?php foreach ($books as $key => $book) {
-      $link = $url . '&id=' . $key; ?>
+    <div class="col-md-12 col-lg-8">
+      <h1>Liste des livres</h1>
+    </div>
+    <div class="col-md-12 col-lg-4 ml-auto">
+      <form method="get" action="<?php echo getQueries($_SERVER['QUERY_STRING'], array(), array('page', 'sort')); ?>">
+        <div class="form-group">
+          <select class="form-control" id="sortBooks">
+            <?php foreach ($sortValues as $value) { ?>
+              <option <?php echo $value['value'] === $sort ? 'selected' : ''; ?>
+                value="<?php echo $value['value']; ?>"><?php echo $value['name']; ?></option>
+            <?php } ?>
+          </select>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="row">
+    <?php foreach ($books as $book) {
+      $link = '?action=books&id=' . $book['id']; ?>
       <div class="col-lg-3 col-md-4 mt-4">
         <div class="card book h-100">
           <div class="image">
@@ -48,11 +64,16 @@
           </div>
           <div class="card-body">
             <h5 class="card-title title"><a href="<?php echo $link; ?>"><?php echo $book['title']; ?></a></h5>
-            <?php if ($book['author'] !== 'Unknown') { ?>
-              <p class="card-text text-muted"><?php echo $book['author']; ?></p>
-            <?php } ?>
+            <p class="card-text text-muted">
+              <?php if ($book['author'] !== 'Unknown') {
+                echo $book['author'] . ' (Auteur)<br>';
+              } ?>
+              Paru en <?php echo $book['year']; ?>
+              <br>
+              <?php echo $book['language'] . ' (Langue)'; ?>
+            </p>
           </div>
-          <div class="card-footer text-muted">
+          <div class="card-footer text-center">
             <a href="<?php echo $link; ?>" class="btn btn-primary">En savoir plus</a>
           </div>
         </div>
@@ -70,7 +91,7 @@
               </li>
             <?php } else { ?>
               <li class="page-item">
-                <a class="page-link" href="<?php echo $url . '&page=' . ($page - 1); ?>">Précédent</a>
+                <a class="page-link" href="<?php echo getQueries($_SERVER['QUERY_STRING'], array('page' => $page - 1)); ?>">Précédent</a>
               </li>
             <?php } ?>
             <?php for ($i = 1; $i <= $pages; $i++) { ?>
@@ -82,7 +103,7 @@
                 </li>
               <?php } else { ?>
                 <li class="page-item">
-                  <a class="page-link" href="<?php echo $url . '&page=' . $i; ?>"><?php echo $i; ?></a>
+                  <a class="page-link" href="<?php echo getQueries($_SERVER['QUERY_STRING'], array('page' => $i)); ?>"><?php echo $i; ?></a>
                 </li>
               <?php } ?>
             <?php } ?>
@@ -92,7 +113,7 @@
               </li>
             <?php } else { ?>
               <li class="page-item">
-                <a class="page-link" href="<?php echo $url . '&page=' . ($page + 1); ?>">Suivant</a>
+                <a class="page-link" href="<?php echo getQueries($_SERVER['QUERY_STRING'], array('page' => $page + 1)); ?>">Suivant</a>
               </li>
             <?php } ?>
           </ul>
