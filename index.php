@@ -11,8 +11,9 @@ switch ($action) {
       showBook($_GET['id']);
     } else {
       $page = isset($_GET['page']) ? (int) $_GET['page'] : 1;
-      $sort = isset($_GET['sort']) ? (string) $_GET['sort'] : null;
-      listBooks($page, $sort);
+      $sort = isset($_GET['sort']) ? (string) $_GET['sort'] : 'title';
+      $query = isset($_GET['q']) ? (string) $_GET['q'] : null;
+      listBooks($page, $sort, $query);
     }
     break;
   default:

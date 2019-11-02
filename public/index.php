@@ -17,8 +17,8 @@
       </button>
 
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <form class="form-inline my-2 my-lg-0 ml-auto">
-          <input class="form-control mr-sm-2" type="search" placeholder="Rechercher un livre" aria-label="Search">
+        <form id="search" class="form-inline my-2 my-lg-0 ml-auto" method="get" action="?action=books">
+          <input value="<?php echo isset($_GET['q']) ? $_GET['q'] : ''; ?>" class="form-control mr-sm-2" type="search" placeholder="Rechercher un livre" aria-label="Search">
           <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Rechercher un livre</button>
         </form>
       </div>

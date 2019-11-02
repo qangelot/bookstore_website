@@ -9,9 +9,10 @@ $breadcrumb = array(array(
 
 /**
  * @param int $page
- * @param string (optional) $sort
+ * @param string $sort
+ * @param string (optional) $query
  */
-function listBooks(int $page = 1, ?string $sort): void
+function listBooks(int $page = 1, string $sort, ?string $query): void
 {
   global $breadcrumb;
   global $limit;
@@ -22,8 +23,8 @@ function listBooks(int $page = 1, ?string $sort): void
     array('value' => 'language', 'name' => "Langue"),
   );
   $breadcrumb[0]['active'] = true;
-  $pages = (int) ceil(countBooks() / $limit);
-  $books = getBooks($page, $sort);
+  $pages = (int) ceil(countBooks($query) / $limit);
+  $books = getBooks($page, $sort, $query);
   require ('views/books.php');
 }
 
