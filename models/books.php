@@ -1,14 +1,18 @@
 <?php
 $file = file_get_contents('json/books.json');
 $books = json_decode($file, true);
+$limit = 20;
 
 /**
+ * @param int $page
  * @return array[]
  */
-function getBooks(): array
+function getBooks(int $page = 1): array
 {
   global $books;
-  return $books;
+  global $limit;
+  $offset = ($page - 1) * $limit;
+  return array_slice($books, $offset, $limit);
 }
 
 /**
@@ -25,4 +29,14 @@ function getBook(string $id): array
   }
 
   return $books[$id];
+}
+
+/**
+ * @return int
+ */
+function countBooks (): int
+{
+  global $books;
+
+  return count($books);
 }

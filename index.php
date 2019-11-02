@@ -7,7 +7,8 @@ switch ($action) {
     if (isset($_GET['id'])) {
       showBook($_GET['id']);
     } else {
-      listBooks();
+      $page = isset($_GET['page']) ? (int) $_GET['page'] : 1;
+      listBooks($page);
     }
     break;
   default:

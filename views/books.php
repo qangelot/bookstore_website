@@ -30,11 +30,12 @@
     }
   }
 </style>
+<?php $url = '?action=books'; ?>
 <div class="container">
   <h1>Liste des livres</h1>
   <div class="row">
     <?php foreach ($books as $key => $book) {
-      $link = '?action=books&id=' . $key; ?>
+      $link = $url . '&id=' . $key; ?>
       <div class="col-lg-3 col-md-4 mt-4">
         <div class="card book h-100">
           <div class="image">
@@ -56,6 +57,47 @@
           </div>
         </div>
       </div>
+    <?php } ?>
+  </div>
+  <?php if ($pages > 1) { ?>
+    <div class="row mt-3">
+      <div class="col-md-12">
+        <nav aria-label="Page navigation livres">
+          <ul class="pagination justify-content-center">
+            <?php if ($page === 1) { ?>
+              <li class="page-item disabled">
+                <span class="page-link">Précédent</span>
+              </li>
+            <?php } else { ?>
+              <li class="page-item">
+                <a class="page-link" href="<?php echo $url . '&page=' . ($page - 1); ?>">Précédent</a>
+              </li>
+            <?php } ?>
+            <?php for ($i = 1; $i <= $pages; $i++) { ?>
+              <?php if ($i === $page) { ?>
+                <li class="page-item active" aria-current="page">
+                  <span class="page-link">
+                    <?php echo $i; ?> <span class="sr-only">(current)</span>
+                  </span>
+                </li>
+              <?php } else { ?>
+                <li class="page-item">
+                  <a class="page-link" href="<?php echo $url . '&page=' . $i; ?>"><?php echo $i; ?></a>
+                </li>
+              <?php } ?>
+            <?php } ?>
+            <?php if ($page === $pages) { ?>
+              <li class="page-item disabled">
+                <span class="page-link">Suivant</span>
+              </li>
+            <?php } else { ?>
+              <li class="page-item">
+                <a class="page-link" href="<?php echo $url . '&page=' . ($page + 1); ?>">Suivant</a>
+              </li>
+            <?php } ?>
+          </ul>
+        </nav>
+      <div>
     <?php } ?>
   </div>
 </div>

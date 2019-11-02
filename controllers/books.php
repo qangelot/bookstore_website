@@ -7,11 +7,13 @@ $breadcrumb = array(array(
   'link' => '?action=books'
 ));
 
-function listBooks(): void
+function listBooks(int $page = 1): void
 {
   global $breadcrumb;
+  global $limit;
   $breadcrumb[0]['active'] = true;
-  $books = getBooks();
+  $pages = (int) ceil(countBooks() / $limit);
+  $books = getBooks($page);
   require ('views/books.php');
 }
 
