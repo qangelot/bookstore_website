@@ -1,4 +1,4 @@
-<?php $title = "Liste des livres"; ?>
+<?php $title = $book['title']; ?>
 <?php ob_start(); ?>
 <?php $author = $book['author'] !== 'Unknown' ? $book['author'] : 'Inconnu'; ?>
 <div class="container">
