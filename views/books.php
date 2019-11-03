@@ -51,7 +51,7 @@
   </div>
   <div class="row">
     <?php foreach ($books as $book) {
-      $link = '?action=books&id=' . $book['id']; ?>
+      $link = './?id=' . $book['id']; ?>
       <div class="col-lg-3 col-md-4 mt-4">
         <div class="card book h-100">
           <div class="image">

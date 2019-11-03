@@ -4,7 +4,7 @@ require('models/books.php');
 
 $breadcrumb = array(array(
   'name' => "Livres",
-  'link' => '?action=books'
+  'link' => './'
 ));
 
 /**
@@ -39,11 +39,11 @@ function showBook (string $id): void
     $breadcrumb[] = array(
       'active' => true,
       'name' => $book['title'],
-      'link' => '?action=books&id=' . $id
+      'link' => './?id=' . $id
     );
     if (isset($_SERVER['HTTP_REFERER'])) {
       parse_str(parse_url($_SERVER['HTTP_REFERER'], PHP_URL_QUERY), $queries);
-      if ($queries['action'] === 'books' && !isset($queries['id'])) {
+      if ((!isset($queries['action']) || !$queries['action']) && !isset($queries['id'])) {
         $searchResult = $_SERVER['HTTP_REFERER'];
       }
     }
