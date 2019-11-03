@@ -13,7 +13,7 @@ $(function () {
   searchField.on('search', search);
 
   function search () {
-    window.location = searchForm.attr('action') + '&q=' + searchField.val();
+    window.location = '?q=' + searchField.val();
   }
 
   $('#sortBooks').change(function () {
