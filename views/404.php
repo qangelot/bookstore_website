@@ -1,6 +1,8 @@
 <?php $title = 'Page not found'; ?>
 <?php ob_start(); ?>
-<h1>Page not found</h1>
-<p>Sorry, that page doesn't exist.</p>
+<div class="container mt-5">
+  <h1>Page non trouvée</h1>
+  <p>Cette page n'existe pas.</p>
+</div>
 <?php $content = ob_get_clean(); ?>
 <?php require('public/index.php'); ?>
