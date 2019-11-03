@@ -1,6 +1,6 @@
 <?php $title = 'Page not found'; ?>
 <?php ob_start(); ?>
-<div class="container mt-5">
+<div class="container mt-5 text-center">
   <h1>Erreur Interne du Serveur</h1>
   <p><?php echo isset($message) ? $message : "Impossible d'afficher cette page"; ?></p>
 </div>

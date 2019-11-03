@@ -1,5 +1,5 @@
 <?php
-if (!isset($_GET['action']) || !$_GET['action']) {
+if (!isset($_GET['path']) || !$_GET['path']) {
   require('controllers/books.php');
   if (isset($_GET['id'])) {
     showBook($_GET['id']);
@@ -10,7 +10,7 @@ if (!isset($_GET['action']) || !$_GET['action']) {
     listBooks($page, $sort, $query);
   }
 } else {
-  switch ((string) $_GET['action']) {
+  switch ((string) $_GET['path']) {
     default:
       require('views/404.php');
   }

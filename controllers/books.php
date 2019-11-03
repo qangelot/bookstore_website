@@ -43,7 +43,7 @@ function showBook (string $id): void
     );
     if (isset($_SERVER['HTTP_REFERER'])) {
       parse_str(parse_url($_SERVER['HTTP_REFERER'], PHP_URL_QUERY), $queries);
-      if ((!isset($queries['action']) || !$queries['action']) && !isset($queries['id'])) {
+      if ((!isset($queries['path']) || !$queries['path']) && !isset($queries['id'])) {
         $searchResult = $_SERVER['HTTP_REFERER'];
       }
     }

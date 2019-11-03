@@ -1,5 +1,5 @@
 <?php
-require('utils/db.php');
+require_once('utils/db.php');
 
 $limit = 20;
 

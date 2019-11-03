@@ -1,6 +1,6 @@
 <?php $title = 'Page not found'; ?>
 <?php ob_start(); ?>
-<div class="container mt-5">
+<div class="container mt-5 text-center">
   <h1>Page non trouvée</h1>
   <p>Cette page n'existe pas.</p>
 </div>
