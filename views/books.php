@@ -57,7 +57,7 @@
           <div class="image">
             <a href="<?php echo $link; ?>">
               <img
-                src="<?php echo $book['imageLink']; ?>"
+                src="<?php echo $book['image']; ?>"
                 class="card-img-top"
                 alt="Image du livre <?php echo $book['title']; ?>">
             </a>
@@ -65,7 +65,7 @@
           <div class="card-body">
             <h5 class="card-title title"><a href="<?php echo $link; ?>"><?php echo $book['title']; ?></a></h5>
             <p class="card-text text-muted">
-              <?php if ($book['author'] !== 'Unknown') {
+              <?php if ($book['author']) {
                 echo $book['author'] . ' (Auteur)<br>';
               } ?>
               Paru en <?php echo $book['year']; ?>
