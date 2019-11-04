@@ -78,11 +78,11 @@ function countBooks(?string $query): int
 }
 
 /**
- * @param string $id Book id
+ * @param int $id Book id
  * @throws Exception
  * @return array
  */
-function getBook(string $id): array
+function getBook(int $id): array
 {
   $db = dbConnect();
 
@@ -180,4 +180,21 @@ function addBookParams($stmt, array $data)
   if (isset($data['wikipedia_link'])) {
     $stmt->bindParam(':wikipedia_link', $data['wikipedia_link'], PDO::PARAM_STR);
   }
+}
+
+/**
+ * @param int $id Book id
+ * @return array
+ */
+function deleteBook(int $id)
+{
+  $db = dbConnect();
+
+  $stmt = $db->prepare('DELETE FROM books WHERE id = :id');
+
+  $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+
+  $stmt->execute();
+
+  return $stmt->rowCount();
 }

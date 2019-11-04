@@ -31,9 +31,9 @@ function listBooks(int $page = 1, string $sort, ?string $query): void
 }
 
 /**
- * @param string $id Book id
+ * @param int $id Book id
  */
-function editBook (string $id): void
+function editBook (int $id): void
 {
   if (isset($_POST['id'])) {
     setBook((int) $_POST['id'], $_POST);
@@ -46,7 +46,7 @@ function editBook (string $id): void
   require('views/book.php');
 }
 
-function newBook()
+function newBook(): void
 {
   if (isset($_POST['book'])) {
     if ($id = addBook($_POST)) {
@@ -59,4 +59,16 @@ function newBook()
   $languages = getLanguages();
 
   require('views/book.php');
+}
+
+/**
+ * @param int $id Book id
+ */
+function removeBook (int $id): void
+{
+  if (deleteBook($id)) {
+    echo "Le livre a bien été supprimé";
+  } else {
+    require('views/500.php');
+  }
 }

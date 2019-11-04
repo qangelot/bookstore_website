@@ -1,3 +1,4 @@
+<?php http_response_code(404); ?>
 <?php $title = 'Page not found'; ?>
 <?php ob_start(); ?>
 <div class="container mt-5 text-center">

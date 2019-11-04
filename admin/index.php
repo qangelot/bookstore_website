@@ -10,6 +10,8 @@ if (!isset($_GET['path']) || !$_GET['path']) {
     editBook((int) $_GET['id']);
   } else if ($_GET['action'] === 'add') {
     newBook();
+  } else if ($_GET['action'] === 'delete' && isset($_GET['id'])) {
+    deleteBook((int) $_GET['id']);
   } else {
     header('Location: ./');
   }

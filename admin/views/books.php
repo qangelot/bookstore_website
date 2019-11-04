@@ -17,6 +17,20 @@
     color: inherit;
   }
 
+  .book .card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .book .card-footer .btn {
+    margin-right: 8px;
+    flex: 1;
+  }
+
+  .book .card-footer .btn:last-child {
+    margin-right: 0;
+  }
 
   @media (min-width: 768px) {
     .book .image {
@@ -58,7 +72,7 @@
     <?php foreach ($books as $book) {
       $link = './?id=' . $book['id']; ?>
       <div class="col-lg-3 col-md-4 mt-4">
-        <div class="card book h-100">
+        <div class="card book h-100" data-book>
           <div class="image">
             <a href="<?php echo $link; ?>">
               <img
@@ -68,7 +82,7 @@
             </a>
           </div>
           <div class="card-body">
-            <h5 class="card-title title"><a href="<?php echo $link; ?>"><?php echo $book['title']; ?></a></h5>
+            <h5 class="card-title title" data-title><a href="<?php echo $link; ?>"><?php echo $book['title']; ?></a></h5>
             <p class="card-text text-muted">
               <?php echo $book['author'] . ' (Auteur)'; ?>
             </p>
@@ -76,6 +90,9 @@
           <div class="card-footer text-center">
             <a class="btn btn-primary" href="?action=edit&id=<?php echo $book['id']; ?>">
               Editer
+            </a>
+            <a class="btn btn-danger" data-toggle="modal" data-remove-book="#removeBook" href="?action=delete&id=<?php echo $book['id']; ?>">
+              Supprimer
             </a>
           </div>
         </div>
@@ -122,6 +139,23 @@
         </nav>
       <div>
     <?php } ?>
+  </div>
+</div>
+
+<div class="modal fade" id="removeBook" tabindex="-1" role="dialog" aria-labelledby="removeBookLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="removeBookLabel">Supprimer le livre "<span id="removeBookTitle"></span>" ?</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+        <button type="button" class="btn btn-danger" data-success>Supprimer</button>
+      </div>
+    </div>
   </div>
 </div>
 <?php $content = ob_get_clean(); ?>
