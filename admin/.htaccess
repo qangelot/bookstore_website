@@ -1,0 +1,4 @@
+AuthName "Admin"
+AuthType Basic
+AuthUserFile "/home/julien/Documents/projects/books/admin/.htpasswd"
+Require valid-user

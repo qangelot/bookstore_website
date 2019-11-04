@@ -1,9 +1,9 @@
-<?php http_response_code(404); ?>
+<?php http_response_code(500); ?>
 <?php $title = 'Page not found'; ?>
 <?php ob_start(); ?>
 <div class="container mt-5 text-center">
-  <h1>Page non trouvée</h1>
-  <p>Cette page n'existe pas.</p>
+  <h1>Erreur Interne du Serveur</h1>
+  <p><?php echo isset($message) ? $message : "Impossible d'afficher cette page"; ?></p>
 </div>
 <?php $content = ob_get_clean(); ?>
 <?php require('public/index.php'); ?>
