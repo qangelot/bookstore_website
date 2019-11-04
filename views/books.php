@@ -36,48 +36,58 @@
     <div class="col-md-12 col-lg-8">
       <h1>Liste des livres</h1>
     </div>
-    <div class="col-md-12 col-lg-4 ml-auto">
-      <form method="get" action="<?php echo getQueries($_SERVER['QUERY_STRING'], array(), array('page', 'sort')); ?>">
-        <div class="form-group">
-          <select class="form-control" id="sortBooks">
-            <?php foreach ($sortValues as $value) { ?>
-              <option <?php echo $value['value'] === $sort ? 'selected' : ''; ?>
-                value="<?php echo $value['value']; ?>"><?php echo $value['name']; ?></option>
-            <?php } ?>
-          </select>
-        </div>
-      </form>
-    </div>
+    <?php if (count($books) > 1) { ?>
+      <div class="col-md-12 col-lg-4 ml-auto">
+        <form method="get" action="<?php echo getQueries($_SERVER['QUERY_STRING'], array(), array('page', 'sort')); ?>">
+          <div class="form-group">
+            <select class="form-control" id="sortBooks">
+              <?php foreach ($sortValues as $value) { ?>
+                <option <?php echo $value['value'] === $sort ? 'selected' : ''; ?>
+                  value="<?php echo $value['value']; ?>"><?php echo $value['name']; ?></option>
+              <?php } ?>
+            </select>
+          </div>
+        </form>
+      </div>
+    <?php } ?>
   </div>
   <div class="row">
-    <?php foreach ($books as $book) {
-      $link = './?id=' . $book['id']; ?>
-      <div class="col-lg-3 col-md-4 mt-4">
-        <div class="card book h-100">
-          <div class="image">
-            <a href="<?php echo $link; ?>">
-              <img
-                src="<?php echo $book['imageLink']; ?>"
-                class="card-img-top"
-                alt="Image du livre <?php echo $book['title']; ?>">
-            </a>
-          </div>
-          <div class="card-body">
-            <h5 class="card-title title"><a href="<?php echo $link; ?>"><?php echo $book['title']; ?></a></h5>
-            <p class="card-text text-muted">
-              <?php if ($book['author'] !== 'Unknown') {
-                echo $book['author'] . ' (Auteur)<br>';
-              } ?>
-              Paru en <?php echo $book['year']; ?>
-              <br>
-              <?php echo $book['language'] . ' (Langue)'; ?>
-            </p>
-          </div>
-          <div class="card-footer text-center">
-            <a href="<?php echo $link; ?>" class="btn btn-primary">En savoir plus</a>
-          </div>
+    <?php if (empty($books)) { ?>
+      <div class="col-md-12 mt-3">
+        <div class="alert alert-warning" role="alert">
+          Désolé, aucun livre correspond à votre recherche.
         </div>
       </div>
+    <?php } else { ?>
+      <?php foreach ($books as $book) {
+        $link = './?id=' . $book['id']; ?>
+        <div class="col-lg-3 col-md-4 mt-4">
+          <div class="card book h-100">
+            <div class="image">
+              <a href="<?php echo $link; ?>">
+                <img
+                  src="<?php echo $book['imageLink']; ?>"
+                  class="card-img-top"
+                  alt="Image du livre <?php echo $book['title']; ?>">
+              </a>
+            </div>
+            <div class="card-body">
+              <h5 class="card-title title"><a href="<?php echo $link; ?>"><?php echo $book['title']; ?></a></h5>
+              <p class="card-text text-muted">
+                <?php if ($book['author'] !== 'Unknown') {
+                  echo $book['author'] . ' (Auteur)<br>';
+                } ?>
+                Paru en <?php echo $book['year']; ?>
+                <br>
+                <?php echo $book['language'] . ' (Langue)'; ?>
+              </p>
+            </div>
+            <div class="card-footer text-center">
+              <a href="<?php echo $link; ?>" class="btn btn-primary">En savoir plus</a>
+            </div>
+          </div>
+        </div>
+      <?php } ?>
     <?php } ?>
   </div>
   <?php if ($pages > 1) { ?>
