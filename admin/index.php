@@ -17,6 +17,50 @@ if (!isset($_GET['path']) || !$_GET['path']) {
   }
 } else {
   switch ((string) $_GET['path']) {
+    case 'authors':
+      require('controllers/authors.php');
+      if (!isset($_GET['action']) || !$_GET['action']) {
+        listAuthors();
+      } else if ($_GET['action'] === 'edit' && isset($_GET['id'])) {
+        editAuthor((int) $_GET['id']);
+      } else if ($_GET['action'] === 'add') {
+        newAuthor();
+      } else if ($_GET['action'] === 'unactive' && isset($_GET['id'])) {
+        unactiveAuthor((int) $_GET['id']);
+      } else {
+        header('Location: ./?path=authors');
+      }
+      break;
+
+    case 'countries':
+      require('controllers/countries.php');
+      if (!isset($_GET['action']) || !$_GET['action']) {
+        listCountries();
+      } else if ($_GET['action'] === 'edit' && isset($_GET['id'])) {
+        editCountry((int) $_GET['id']);
+      } else if ($_GET['action'] === 'add') {
+        newCountry();
+      } else if ($_GET['action'] === 'unactive' && isset($_GET['id'])) {
+        unactiveCountry((int) $_GET['id']);
+      } else {
+        header('Location: ./?path=countries');
+      }
+      break;
+
+    case 'languages':
+      require('controllers/languages.php');
+      if (!isset($_GET['action']) || !$_GET['action']) {
+        listLanguages();
+      } else if ($_GET['action'] === 'edit' && isset($_GET['id'])) {
+        editLanguage((int) $_GET['id']);
+      } else if ($_GET['action'] === 'add') {
+        newLanguage();
+      } else if ($_GET['action'] === 'unactive' && isset($_GET['id'])) {
+        unactiveLanguage((int) $_GET['id']);
+      } else {
+        header('Location: ./?path=languages');
+      }
+      break;
     default:
       require('views/404.php');
   }

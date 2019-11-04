@@ -35,6 +35,8 @@ function listBooks(int $page = 1, string $sort, ?string $query): void
  */
 function editBook (int $id): void
 {
+  global $breadcrumb;
+
   if (isset($_POST['id'])) {
     setBook((int) $_POST['id'], $_POST);
   }
@@ -43,11 +45,22 @@ function editBook (int $id): void
   $countries = getCountries();
   $languages = getLanguages();
 
+  $breadcrumb[] = array(
+    'active' => true,
+    'name' => "Editer un livre : " . $book['title'],
+  );
+
   require('views/book.php');
 }
 
 function newBook(): void
 {
+  global $breadcrumb;
+  $breadcrumb[] = array(
+    'active' => true,
+    'name' => "Ajouter un livre",
+  );
+
   if (isset($_POST['book'])) {
     if ($id = addBook($_POST)) {
       header('Location: ./?action=edit&id=' . $id);
@@ -67,7 +80,7 @@ function newBook(): void
 function removeBook (int $id): void
 {
   if (deleteBook($id)) {
-    echo "Le livre a bien été supprimé";
+    header('Location: ' . $_SERVER['HTTP_REFERER']);
   } else {
     require('views/500.php');
   }

@@ -86,7 +86,7 @@ function getBook(int $id): array
 {
   $db = dbConnect();
 
-  $stmt = $db->prepare('SELECT * FROM books WHERE books.id = :id');
+  $stmt = $db->prepare('SELECT * FROM books WHERE id = :id');
 
   $stmt->bindParam(':id', $id);
 
@@ -94,6 +94,7 @@ function getBook(int $id): array
 
   return $stmt->fetch();
 }
+
 /**
  * @param array $data
  * @return int
@@ -186,7 +187,7 @@ function addBookParams($stmt, array $data)
  * @param int $id Book id
  * @return array
  */
-function deleteBook(int $id)
+function deleteBook(int $id): int
 {
   $db = dbConnect();
 

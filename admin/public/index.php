@@ -20,22 +20,40 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="./" id="bookDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <a class="nav-link dropdown-toggle" href="./" id="booksDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Livres
             </a>
-            <div class="dropdown-menu" aria-labelledby="bookDropdown">
+            <div class="dropdown-menu" aria-labelledby="booksDropdown">
               <a class="dropdown-item" href="./">Liste des livres</a>
               <a class="dropdown-item" href="?action=add">Ajouter un livre</a>
             </div>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="?path=authors">Auteurs</a>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="?path=authors" id="authorsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Auteurs
+            </a>
+            <div class="dropdown-menu" aria-labelledby="authorsDropdown">
+              <a class="dropdown-item" href="?path=authors">Liste des auteurs</a>
+              <a class="dropdown-item" href="?path=authors&action=add">Ajouter un auteur</a>
+            </div>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="?path=countries">Pays</a>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="?path=countries" id="countriesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Pays
+            </a>
+            <div class="dropdown-menu" aria-labelledby="countriesDropdown">
+              <a class="dropdown-item" href="?path=countries">Liste des pays</a>
+              <a class="dropdown-item" href="?path=countries&action=add">Ajouter un pays</a>
+            </div>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="?path=languages">Langues</a>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="?path=languages" id="languagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Langues
+            </a>
+            <div class="dropdown-menu" aria-labelledby="languagesDropdown">
+              <a class="dropdown-item" href="?path=languages">Liste des langues</a>
+              <a class="dropdown-item" href="?path=languages&action=add">Ajouter une langue</a>
+            </div>
           </li>
         </ul>
       </div>

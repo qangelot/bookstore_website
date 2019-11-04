@@ -2,7 +2,6 @@
 <?php ob_start(); ?>
 
 <div class="container">
-  <h1><?php echo $title; ?></h1>
   <form method="post">
     <div class="row">
       <div class="col-md-6">
