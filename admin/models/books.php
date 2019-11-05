@@ -129,6 +129,7 @@ function setBook(int $id, array $data): int
       books SET
       title = :title
       ' . (isset($data['description']) ? ', description = :description' : null) . '
+      ' . (isset($data['image']) ? ', image = :image' : null) . '
       ' . (isset($data['year']) ? ', year = :year' : null) . '
       ' . (isset($data['pages']) ? ', pages = :pages' : null) . '
       ' . (isset($data['wikipedia_link']) ? ', wikipedia_link = :wikipedia_link' : null) . '
@@ -140,47 +141,41 @@ function setBook(int $id, array $data): int
 
     $stmt->bindParam(':id', $id, PDO::PARAM_INT);
 
-    addBookParams($stmt, $data);
+    $stmt->bindParam(':title', $data['title'], PDO::PARAM_STR);
+
+    if (isset($data['description'])) {
+      $stmt->bindParam(':description', $data['description'], PDO::PARAM_STR);
+    }
+
+    if (isset($data['image'])) {
+      $stmt->bindParam(':image', $data['image'], PDO::PARAM_STR);
+    }
+
+    if (isset($data['author_id'])) {
+      $stmt->bindParam(':author_id', $data['author_id'], PDO::PARAM_INT);
+    }
+
+    if (isset($data['country_id'])) {
+      $stmt->bindParam(':country_id', $data['country_id'], PDO::PARAM_INT);
+    }
+
+    if (isset($data['language_id'])) {
+      $stmt->bindParam(':language_id', $data['language_id'], PDO::PARAM_INT);
+    }
+
+    if (isset($data['year'])) {
+      $stmt->bindParam(':year', $data['year'], PDO::PARAM_INT);
+    }
+
+    if (isset($data['pages'])) {
+      $stmt->bindParam(':pages', $data['pages'], PDO::PARAM_INT);
+    }
+
+    if (isset($data['wikipedia_link'])) {
+      $stmt->bindParam(':wikipedia_link', $data['wikipedia_link'], PDO::PARAM_STR);
+    }
 
     return $stmt->execute();
-}
-
-/**
- * @param PDOStatement $stmt
- * @param array $data
- * @return int
- */
-function addBookParams($stmt, array $data)
-{
-  $stmt->bindParam(':title', $data['title'], PDO::PARAM_STR);
-
-  if (isset($data['description'])) {
-    $stmt->bindParam(':description', $data['description'], PDO::PARAM_STR);
-  }
-
-  if (isset($data['author_id'])) {
-    $stmt->bindParam(':author_id', $data['author_id'], PDO::PARAM_INT);
-  }
-
-  if (isset($data['country_id'])) {
-    $stmt->bindParam(':country_id', $data['country_id'], PDO::PARAM_INT);
-  }
-
-  if (isset($data['language_id'])) {
-    $stmt->bindParam(':language_id', $data['language_id'], PDO::PARAM_INT);
-  }
-
-  if (isset($data['year'])) {
-    $stmt->bindParam(':year', $data['year'], PDO::PARAM_INT);
-  }
-
-  if (isset($data['pages'])) {
-    $stmt->bindParam(':pages', $data['pages'], PDO::PARAM_INT);
-  }
-
-  if (isset($data['wikipedia_link'])) {
-    $stmt->bindParam(':wikipedia_link', $data['wikipedia_link'], PDO::PARAM_STR);
-  }
 }
 
 /**

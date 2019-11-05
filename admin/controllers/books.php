@@ -38,6 +38,9 @@ function editBook (int $id): void
   global $breadcrumb;
 
   if (isset($_POST['id'])) {
+    if ($image = addImage()) {
+      $_POST['image'] = $image;
+    }
     setBook((int) $_POST['id'], $_POST);
   }
   $book = getBook($id);
@@ -62,6 +65,9 @@ function newBook(): void
   );
 
   if (isset($_POST['book'])) {
+    if ($image = addImage()) {
+      $_POST['image'] = $image;
+    }
     if ($id = addBook($_POST)) {
       header('Location: ./?action=edit&id=' . $id);
     }
@@ -72,6 +78,23 @@ function newBook(): void
   $languages = getLanguages();
 
   require('views/book.php');
+}
+
+/**
+ * @return string
+ */
+function addImage (): ?string
+{
+  if (
+    !isset($_FILES['image']) ||
+    $_FILES['image']['error'] ||
+    !in_array($_FILES['image']['type'], ['image/png', 'image/jpeg'])
+  ) {
+    return null;
+  }
+  $image = 'public/images/books/' . $_FILES['image']['name'];
+  move_uploaded_file($_FILES['image']['tmp_name'], '../' . $image);
+  return $image;
 }
 
 /**

@@ -69,20 +69,19 @@
     </div>
   </div>
   <div class="row">
-    <?php foreach ($books as $book) {
-      $link = './?id=' . $book['id']; ?>
+    <?php foreach ($books as $book) { ?>
       <div class="col-lg-3 col-md-4 mt-4">
         <div class="card book h-100" data-book>
           <div class="image">
-            <a href="<?php echo $link; ?>">
-              <img
-                src="../<?php echo $book['image']; ?>"
-                class="card-img-top"
-                alt="Image du livre <?php echo $book['title']; ?>">
-            </a>
+            <img
+              src="../<?php echo $book['image']; ?>"
+              class="card-img-top"
+              alt="Image du livre <?php echo $book['title']; ?>">
           </div>
           <div class="card-body">
-            <h5 class="card-title title" data-title><a href="<?php echo $link; ?>"><?php echo $book['title']; ?></a></h5>
+            <h5 class="card-title title" data-title>
+              <?php echo $book['title']; ?>
+            </h5>
             <p class="card-text text-muted">
               <?php echo $book['author'] . ' (Auteur)'; ?>
             </p>

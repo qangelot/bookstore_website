@@ -2,7 +2,7 @@
 <?php ob_start(); ?>
 
 <div class="container">
-  <form method="post">
+  <form method="post" enctype="multipart/form-data">
     <div class="row">
       <div class="col-md-6">
         <div class="form-group">
@@ -50,6 +50,10 @@
               </option>
             <?php } ?>
           </select>
+        </div>
+        <div class="custom-file">
+          <input name="image" type="file" class="custom-file-input">
+          <label class="custom-file-label" for="file" data-browse="Choisir">Choisir une image</label>
         </div>
       </div>
       <div class="col-md-6">
